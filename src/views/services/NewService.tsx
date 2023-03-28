@@ -11,7 +11,7 @@ import TextArea from "../../components/form/TextArea";
 const serverURL = import.meta.env.VITE_API_URL;
 
 const NewService = () => {
-const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
@@ -37,13 +37,13 @@ const navigate = useNavigate()
   }, []);
 
   const create = () => {
-    DefaultService.postService({
+    DefaultService.create({
       requestBody: { name, duration, price, category, description, picture },
     })
-      .then((service) => {
-        navigate("/services")
+      .then((service: any) => {
+        navigate("/services");
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         console.log(error);
       });
   };
