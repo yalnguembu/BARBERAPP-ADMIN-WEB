@@ -1,0 +1,376 @@
+openapi: "3.0.2"
+info:
+  title: ghostbarber
+  version: "1.0"
+servers:
+  - url: http://192.168.31.240:5000
+tags:
+  - name: User
+    description: Everythings concerning user
+  - name: Authentication
+    description: Everythings concerning user
+  - name: Autorization
+    description: Everythings concerning user
+  - name: Service
+    description: Everythings concerning services
+  - name: Reservations
+    description: Everythings concerning reservations
+paths:
+  /auth/login:
+    post:
+      summary: "login user"
+      description: "login user"
+      operationId: login
+      requestBody:
+        description: fields need for autenticate user
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthDTO"
+      responses:
+        "200":
+          description: updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponseDTO"
+        "403":
+          description: wrong crudentials
+        "400":
+          description: invalid crudentials
+  /auth/register:
+    post:
+      summary: "create user account"
+      description: "create user account"
+      operationId: register
+      requestBody:
+        description: fields need for create user account
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthDTO"
+      responses:
+        "200":
+          description: updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponseDTO"
+        "409":
+          description: email address already taken
+        "400":
+          description: invalid crudentials
+  /auth/verify-token:
+    post:
+      summary: "verify a use token"
+      description: "verify a use token"
+      operationId: verifyToken
+      requestBody:
+        description: fields need for verify a use token
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccesTokenDTO"
+      responses:
+        "200":
+          description: token validated
+        "403":
+          description: invalid token
+  /users:
+    get:
+      tags:
+        - User
+      summary: fecth all users
+      description: fecth all users
+      operationId: getAll
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserDTO"
+        "401":
+          description: unauthorize
+  /user/{id}:
+    get:
+      tags:
+        - User
+      summary: fetch user details
+      description: fetch user details
+      operationId: getUserById
+      responses:
+        "200":
+          description: informations successfully fecthed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+        "401":
+          description: unauthorize
+    put:
+      summary: "update user informations"
+      description: "update user informations"
+      requestBody:
+        description: fields need for update user informations
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+      responses:
+        "200":
+          description: updated successfully
+    parameters:
+      - name: id
+        description: the user id to get
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        style: simple
+  /services:
+    get:
+      tags:
+        - Services
+      summary: fetch all services
+      description: fetch  all services
+      operationId: getAll
+      responses:
+        "200":
+          description: informations successfully fecthed
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/ServiceDTO"
+        "401":
+          description: unauthorize
+  /service:
+    post:
+      summary: "create new services"
+      description: "create new services"
+      operationId: create
+      requestBody:
+        description: fields need for create services informations
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateServiceDTO"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceDTO"
+          description: updated successfully
+  /service/{id}:
+    get:
+      tags:
+        - Service
+      summary: fetch Service details
+      description: fetch Service details
+      operationId: getById
+      responses:
+        "200":
+          description: informations successfully fecthed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceDTO"
+        "401":
+          description: unauthorize
+    put:
+      summary: "update services informations"
+      description: "update services informations"
+      requestBody:
+        description: fields need for update services informations
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateServiceDTO"
+      responses:
+        "200":
+          description: updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceDTO"
+    parameters:
+      - name: id
+        description: the service id to get
+        in: path
+        required: true
+        schema:
+          type: string
+        style: simple
+  /reservations:
+    get:
+      tags:
+        - Reservations
+      summary: fetch all reservations
+      description: fetch  all reservations
+      operationId: getAll
+      responses:
+        "200":
+          description: informations successfully fecthed
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/ReservationDTO"
+        "401":
+          description: unauthorize
+
+components:
+  schemas:
+    UserDTO:
+      type: object
+      required:
+        - id
+        - email
+        - role
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        username:
+          type: string
+        picture:
+          type: string
+        role:
+          type: string
+    AuthDTO:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    AuthResponseDTO:
+      type: object
+      required:
+        - id
+        - email
+        - accessToken
+        - role
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        accessToken:
+          type: string
+        role:
+          type: string
+    AccesTokenDTO:
+      type: object
+      required:
+        - accessToken
+      properties:
+        accessToken:
+          type: string
+    CreateServiceDTO:
+      type: object
+      required:
+        - name
+        - category
+        - picture
+        - price
+        - duration
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        picture:
+          type: string
+        price:
+          type: number
+        duration:
+          type: number
+    ServiceDTO:
+      type: object
+      required:
+        - _id
+        - name
+        - category
+        - picture
+        - price
+        - duration
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        picture:
+          type: string
+        price:
+          type: number
+        duration:
+          type: number
+    ReservationDTO:
+      type: object
+      required:
+        - _id
+        - name
+        - category
+        - picture
+        - price
+        - duration
+      properties:
+        _id:
+          type: string
+        service:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            description:
+              type: string
+            duration:
+              type: string
+            price:
+              type: string
+        client:
+          type: object
+          properties:
+            id:
+              type: string
+            username:
+              type: string
+            email:
+              type: string
+        date:
+          type: string
+        picture:
+          type: string
+        price:
+          type: number
+        duration:
+          type: number
+        isCanceled:
+          type: boolean
