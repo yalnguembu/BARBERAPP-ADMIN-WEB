@@ -163,7 +163,7 @@ paths:
         description: fields need for create services informations
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
               $ref: "#/components/schemas/CreateServiceDTO"
       responses:
@@ -302,6 +302,7 @@ components:
           type: string
         picture:
           type: string
+          format: binary
         price:
           type: number
         duration:

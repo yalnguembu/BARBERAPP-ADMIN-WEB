@@ -3,3 +3,8 @@ export interface Target {
     value: string;
   };
 }
+export interface FileTarget {
+  target: {
+    files: FileList | null;
+  };
+}

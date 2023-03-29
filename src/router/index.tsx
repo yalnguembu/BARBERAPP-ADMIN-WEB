@@ -11,6 +11,7 @@ import NotFound from "../views/NotFound";
 import ServiceDetails from "../views/services/ServiceDetails";
 import UpdateService from "../views/services/UpdateService";
 import NewService from "../views/services/NewService";
+import Users from "../views/services/Users";
 
 const Router = () => {
   return (
@@ -25,6 +26,7 @@ const Router = () => {
             <Route path=":id/edit" element={<UpdateService />} />
             <Route path="reservations" element={<Reservations />} />
           </Route>
+          <Route path="users" element={<Users />} />
         </Route>
         <Route path="/auth">
           <Route index element={<OnBoarding />} />

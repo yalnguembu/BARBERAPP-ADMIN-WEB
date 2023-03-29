@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import user from "../assets/images/user.png";
 import DashboardIcon from "./icons/DashboardIcon";
 import GroupIcon from "./icons/GroupIcon";
@@ -7,6 +7,9 @@ import MallBagIcon from "./icons/MallBagIcon";
 import SettingIcon from "./icons/SettingIcon";
 
 const TheAsideMenu = () => {
+  const path = useLocation().pathname;
+  const isInclueInPath = (value: string) => path.search(value);
+
   return (
     <div className="h-full overflow-y-auto w-60 border-r border-lightgray-100 p-6">
       <div className="user py-6 text-center">
@@ -23,29 +26,58 @@ const TheAsideMenu = () => {
       <div className="">
         <ul>
           <li>
-            <Link to="/" className="p-4 block bg-gray-200 rounded-lg">
+            <Link
+              to="/"
+              className={`p-4 block rounded-lg ${
+                path === "/" ? "bg-gray-200" : "text-gray-500"
+              }`}
+            >
               <DashboardIcon />
               <span className="ml-2 align-middle">DashBoard</span>
             </Link>
           </li>
           <li>
-            <Link to="services" className="p-4 block rounded-lg text-gray-500">
+            <Link
+              to="services"
+              className={`p-4 block rounded-lg ${
+                isInclueInPath("services") !== -1
+                  ? "bg-gray-200"
+                  : "text-gray-500"
+              }`}
+            >
               <ListIcon />
               <span className="ml-2 align-middle">Services</span>
             </Link>
           </li>
           <li>
-            <Link to="store" className="p-4 block rounded-lg text-gray-500">
+            <Link
+              to="store"
+              className={`p-4 block rounded-lg ${
+                isInclueInPath("store") !== -1 ? "bg-gray-200" : "text-gray-500"
+              }`}
+            >
               <MallBagIcon /> <span className="ml-2 align-middle">Store</span>
             </Link>
           </li>
           <li>
-            <Link to="users" className="p-4 block rounded-lg text-gray-500">
+            <Link
+              to="users"
+              className={`p-4 block rounded-lg ${
+                isInclueInPath("users") !== -1 ? "bg-gray-200" : "text-gray-500"
+              }`}
+            >
               <GroupIcon /> <span className="ml-2 align-middle">Users</span>
             </Link>
           </li>
           <li>
-            <Link to="" className="p-4 block rounded-l text-gray-500">
+            <Link
+              to=""
+              className={`p-4 block rounded-lg ${
+                isInclueInPath("settings") !== -1
+                  ? "bg-gray-200"
+                  : "text-gray-500"
+              }`}
+            >
               <SettingIcon />
               <span className="ml-2 align-middle">Settings</span>
             </Link>

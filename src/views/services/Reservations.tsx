@@ -21,7 +21,7 @@ const Reservations = () => {
   return (
     <div className="w-full min-h-full bg-gray-100">
       <div className="fixed top-0 right-0 w-full lg:w-[calc(100%-15rem)]">
-        <NavBar create />
+        <NavBar />
       </div>
       <div className="p-8 pt-32">
         <div className="bg-white p-4 rounded-lg">
