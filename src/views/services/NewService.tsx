@@ -26,19 +26,19 @@ const NewService = () => {
     setPicture(files?.length ? files[0] : undefined);
   }, []);
   const handelName = useCallback(({ target: { value } }: Target) => {
-    setName(value);
+    setName(value as string);
   }, []);
   const handelPrice = useCallback(({ target: { value } }: Target) => {
-    setPrice(parseInt(value));
+    setPrice(parseInt(value as string));
   }, []);
   const handelDuration = useCallback(({ target: { value } }: Target) => {
-    setDuration(parseInt(value));
+    setDuration(parseInt(value as string));
   }, []);
   const handelCategory = useCallback(({ target: { value } }: Target) => {
-    setCategory(value);
+    setCategory(value as string);
   }, []);
   const handelDescription = useCallback(({ target: { value } }: Target) => {
-    setDescription(value);
+    setDescription(value as string);
   }, []);
 
   const create = (event: Event) => {
@@ -71,7 +71,7 @@ const NewService = () => {
         <NavBar />
       </div>
       <div className="p-8 pt-28">
-        <form encType="multipart/form-data" onSubmit={create}>
+        <form encType="multipart/form-data">
           <div className="flex w-full justify-between">
             <h3 className="text-lg">
               <Link to="/services" className="hover:text-blue-400 mr-4">
@@ -80,7 +80,7 @@ const NewService = () => {
               New service
             </h3>
             <div className="mb-4">
-              <SubmitButton title="Create" type="submit" />
+              <SubmitButton title="Create" type="submit" onPress={create} />
             </div>
           </div>
           <div className="shadow bg-white p-6 flex rounded pt-8">
@@ -112,14 +112,14 @@ const NewService = () => {
                 </div>
                 <TextField
                   label="Price"
-                  inputType="text"
+                  inputType="number"
                   placeholder="Enter price"
                   value={price}
                   handelChange={handelPrice}
                 />
                 <TextField
                   label="Duration"
-                  inputType="text"
+                  inputType="number"
                   placeholder="Enter duration"
                   value={duration}
                   handelChange={handelDuration}

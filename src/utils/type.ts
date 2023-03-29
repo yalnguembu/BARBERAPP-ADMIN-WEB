@@ -1,6 +1,6 @@
 export interface Target {
   target: {
-    value: string;
+    value: string | number;
   };
 }
 export interface FileTarget {

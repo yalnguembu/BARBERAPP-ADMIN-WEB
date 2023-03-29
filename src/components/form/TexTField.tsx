@@ -15,7 +15,7 @@ const TextField = ({
         type={inputType}
         className="border rounded-lg px-5 p-3 w-full outline-blue-400 mt-4"
         placeholder={placeholder}
-        value={value}
+        value={(inputType = "number" && !Number.isNaN(value) ? value : 0)}
         onChange={handelChange}
       />
       {error ? <p className="text-red-500 text-sm">{error}</p> : <></>}

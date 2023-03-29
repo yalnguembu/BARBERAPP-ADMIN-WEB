@@ -25,13 +25,15 @@ const Services = () => {
       </div>
       <div className="p-4 pt-24">
         {services.length ? (
-          <div className="grid grid-cols-1 gap-8 p-8 lg:grid-cols-2 xl:grid-cols-3">
+          <div>
             <div className="w-3/5 mx-auto my-4 mt-8">
               <SearchBar />
             </div>
-            {services.map((service, index) => (
-              <ServiceItem key={index} service={new Service(service)} />
-            ))}
+            <div className="grid grid-cols-1 gap-8 p-8 lg:grid-cols-2 xl:grid-cols-3">
+              {services.map((service, index) => (
+                <ServiceItem key={index} service={new Service(service)} />
+              ))}
+            </div>
           </div>
         ) : (
           <div className="w-full h-96 flex items-center justify-center">
