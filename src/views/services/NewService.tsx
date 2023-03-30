@@ -17,7 +17,7 @@ const NewService = () => {
 
   const [name, setName] = useState("");
   const [picture, setPicture] = useState<File | undefined | string>("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState<number>(0);
   const [duration, setDuration] = useState(0);
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");

@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import SearchBar from "../../components/form/SearchBar";
 import UsersListItem from "../../components/users/UsersListItem";
 import { User } from "../../domains";
 import { UserDTO, UserService } from "../../services";
+import { Target } from "../../utils/type";
 
 const Users = () => {
   const [users, setUsers] = useState<UserDTO[]>();
+  const [search, setSearch] = useState<string>("");
+
+  const handelSearch = useCallback(({ target: { value } }: Target) => {
+    setSearch(value);
+  }, []);
 
   useEffect(() => {
     UserService.getAll()
@@ -24,7 +30,11 @@ const Users = () => {
           <div className="p-4 flex items-center justify-between border-b">
             <h3 className="font-bold text-xl">Users</h3>
             <div className="w-58">
-              <SearchBar />
+              <SearchBar
+                handelChange={handelSearch}
+                value={search}
+                placeholder="Serach users..."
+              />
             </div>
           </div>
           <table className="w-full text-left">

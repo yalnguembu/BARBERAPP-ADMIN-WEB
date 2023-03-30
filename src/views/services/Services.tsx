@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import SearchBar from "../../components/form/SearchBar";
 import NavBar from "../../components/NavBar";
 import ServiceItem from "../../components/services/ServiceItem";
 import { Service } from "../../domains";
 import { ServicesService } from "../../services";
+import { Target } from "../../utils/type";
 
 const Services = () => {
   const [services, setServices] = useState([]);
+  const [search, setSearch] = useState<string>("");
+
+  const handelSearch = useCallback(({ target: { value } }: Target) => {
+    setSearch(value);
+    // filter(value);
+  }, []);
 
   useEffect(() => {
     ServicesService.getAll()
@@ -27,7 +34,11 @@ const Services = () => {
         {services.length ? (
           <div>
             <div className="w-3/5 mx-auto my-4 mt-8">
-              <SearchBar />
+              <SearchBar
+                handelChange={handelSearch}
+                value={search}
+                placeholder="Serach services..."
+              />
             </div>
             <div className="grid grid-cols-1 gap-8 p-8 lg:grid-cols-2 xl:grid-cols-3">
               {services.map((service, index) => (

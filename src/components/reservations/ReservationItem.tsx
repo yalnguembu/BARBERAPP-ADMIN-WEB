@@ -8,7 +8,7 @@ const ReservationItem = ({ reservation }: { reservation: Reservation }) => {
       className="hover:bg-gray-100 cursor-pointer"
       onClick={() => navigate(`${reservation.id}`)}
     >
-      <td className="p-4">{reservation.id.substring(0, 12).toUpperCase()}</td>
+      <td className="p-4">{reservation.id.substring(4, 19).toUpperCase()}</td>
       <td className="p-4">{reservation.clientName}</td>
       <td className="font-bold p-4">{reservation.serviceName}</td>
       <td className="p-4">
