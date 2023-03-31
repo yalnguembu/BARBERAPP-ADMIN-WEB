@@ -163,7 +163,7 @@ paths:
         description: fields need for create services informations
         required: true
         content:
-          multipart/form-data:
+          application/json:
             schema:
               $ref: "#/components/schemas/CreateServiceDTO"
       responses:
@@ -192,6 +192,7 @@ paths:
     put:
       summary: "update services informations"
       description: "update services informations"
+      operationId: update
       requestBody:
         description: fields need for update services informations
         required: true
@@ -206,9 +207,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ServiceDTO"
+    delete:
+      tags:
+        - Service
+      summary: delete Service details
+      description: delete Service details
+      operationId: deleteById
+      responses:
+        "200":
+          description: services successfully delete
+        "401":
+          description: unauthorize
     parameters:
       - name: id
-        description: the service id to get
+        description: the service id to delet
         in: path
         required: true
         schema:
@@ -302,7 +314,6 @@ components:
           type: string
         picture:
           type: string
-          format: binary
         price:
           type: number
         duration:
@@ -331,6 +342,11 @@ components:
           type: number
         duration:
           type: number
+    FileDTO:
+      type: object
+      properties:
+        file:
+          type: string
     ReservationDTO:
       type: object
       required:

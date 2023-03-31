@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams,useNavigate } from "react-router-dom";
 import NavBar from "../../components/NavBar";
 import { Service, nullService } from "../../domains";
 import { ServiceService } from "../../services";
@@ -10,6 +10,19 @@ const serverURL = import.meta.env.VITE_API_URL;
 const ServiceDetails = () => {
   const [service, setService] = useState<Service>(nullService);
   const { id } = useParams();
+  const [isDeletemodalVisible, setIsDeletemodalVisible] = useState(false);
+  const navigate = useNavigate()
+
+  const deleteService = async () => {
+    try {
+      await ServiceService.deleteById({ id: id as string });
+      navigate("/services")
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const toggleIsDeletemodalVisible = () => setIsDeletemodalVisible(!isDeletemodalVisible)
 
   useEffect(() => {
     if (id) {
@@ -43,7 +56,7 @@ const ServiceDetails = () => {
             >
               <span>Edit</span>
             </Link>
-            <button className="p-2 px-4 border-gray-300 rounded-lg mb-4 border hover:text-red-400 hover:border-red-400 ml-4">
+            <button className="p-2 px-4 border-gray-300 rounded-lg mb-4 border hover:text-red-400 hover:border-red-400 ml-4" onClick={toggleIsDeletemodalVisible}>
               <span>Delete</span>
             </button>
           </div>
@@ -73,6 +86,26 @@ const ServiceDetails = () => {
           </div>
         </div>
       </div>
+     
+        {isDeletemodalVisible ? ( <div className="absolute bottom-10 right-10 shadow-xl rounded p-4 bg-white">
+        <p className="font-bold text-lg mb-2">
+          Do you really want to remove this service
+        </p>
+          <div className="w-full flex justify-end">
+            <button className="bg-gray-200 text-black rounded px-4 py-2 mr-4" onClick={toggleIsDeletemodalVisible}>
+              Cancel
+            </button>
+            <button
+              className="bg-red-400 text-white rounded px-4 py-2"
+              onClick={deleteService}
+            >
+              Delete
+            </button>
+          </div>
+      </div>
+        ) : (
+          <></>
+        )}
     </div>
   );
 };

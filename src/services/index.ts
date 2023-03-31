@@ -10,6 +10,7 @@ export type { AccesTokenDTO } from './models/AccesTokenDTO';
 export type { AuthDTO } from './models/AuthDTO';
 export type { AuthResponseDTO } from './models/AuthResponseDTO';
 export type { CreateServiceDTO } from './models/CreateServiceDTO';
+export type { FileDTO } from './models/FileDTO';
 export type { ReservationDTO } from './models/ReservationDTO';
 export type { ServiceDTO } from './models/ServiceDTO';
 export type { UserDTO } from './models/UserDTO';

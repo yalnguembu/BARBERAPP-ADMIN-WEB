@@ -48,13 +48,13 @@ const NewService = () => {
     const form = new FormData();
 
     DefaultService.create({
-      formData: {
+      requestBody: {
         name,
         duration,
         price,
         category,
         description,
-        picture: picture as unknown as Blob,
+        picture: "",
       },
     })
       .then((service: any) => {
@@ -103,7 +103,12 @@ const NewService = () => {
               <div className="w-full px-3 grid grid-cols-2 gap-4 gap-y-8">
                 <div className="col-span-2">
                   <SelectBox
-                    options={["hair style", "facial care", "body care"]}
+                    options={[
+                      "hair style",
+                      "facial care",
+                      "body care",
+                      "hair traitement",
+                    ]}
                     label="Category"
                     placeholder="Select category"
                     value={category}

@@ -51,7 +51,7 @@ const TheAsideMenu = () => {
           </li>
           <li>
             <Link
-              to="store"
+              to="#"
               className={`p-4 block rounded-lg ${
                 isInclueInPath("store") !== -1 ? "bg-gray-200" : "text-gray-500"
               }`}
@@ -71,7 +71,7 @@ const TheAsideMenu = () => {
           </li>
           <li>
             <Link
-              to=""
+              to="#"
               className={`p-4 block rounded-lg ${
                 isInclueInPath("settings") !== -1
                   ? "bg-gray-200"

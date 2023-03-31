@@ -19,12 +19,38 @@ export class ServiceService {
         id,
     }: {
         /**
-         * the service id to get
+         * the service id to delet
          */
         id: string,
     }): CancelablePromise<ServiceDTO> {
         return __request(OpenAPI, {
             method: 'GET',
+            url: '/service/{id}',
+            path: {
+                'id': id,
+            },
+            errors: {
+                401: `unauthorize`,
+            },
+        });
+    }
+
+    /**
+     * delete Service details
+     * delete Service details
+     * @returns any services successfully delete
+     * @throws ApiError
+     */
+    public static deleteById({
+        id,
+    }: {
+        /**
+         * the service id to delet
+         */
+        id: string,
+    }): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
             url: '/service/{id}',
             path: {
                 'id': id,
