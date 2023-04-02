@@ -244,6 +244,24 @@ paths:
                   $ref: "#/components/schemas/ReservationDTO"
         "401":
           description: unauthorize
+  /reservations/archived:
+    get:
+      tags:
+        - Reservations
+      summary: fetch all reservations
+      description: fetch  all reservations
+      operationId: getArchived
+      responses:
+        "200":
+          description: informations successfully fecthed
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/ReservationDTO"
+        "401":
+          description: unauthorize
 
 components:
   schemas:

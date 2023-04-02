@@ -15,7 +15,7 @@ export class Reservation {
   }
 
   get clientName() {
-    return this.reservation.client?.username;
+    return this.reservation.client?.username ?? "-";
   }
 
   get fullDate() {

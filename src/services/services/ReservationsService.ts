@@ -23,4 +23,20 @@ export class ReservationsService {
         });
     }
 
+    /**
+     * fetch all reservations
+     * fetch  all reservations
+     * @returns any informations successfully fecthed
+     * @throws ApiError
+     */
+    public static getArchived(): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/reservations/archived',
+            errors: {
+                401: `unauthorize`,
+            },
+        });
+    }
+
 }
