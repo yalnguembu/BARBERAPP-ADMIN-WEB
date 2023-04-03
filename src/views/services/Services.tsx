@@ -3,16 +3,26 @@ import SearchBar from "../../components/form/SearchBar";
 import NavBar from "../../components/NavBar";
 import ServiceItem from "../../components/services/ServiceItem";
 import { Service } from "../../domains";
-import { ServicesService } from "../../services";
+import { ServiceDTO, ServicesService } from "../../services";
 import { Target } from "../../utils/type";
 
 const Services = () => {
   const [services, setServices] = useState([]);
   const [search, setSearch] = useState<string>("");
 
+  const [filteredServices, setFilteredServices] = useState<ServiceDTO[]>([]);
+
+  const filter = (keyWord: string, datas: ServiceDTO[]) => {
+    keyWord = keyWord.toLowerCase();
+    return datas?.filter(
+      (datas: ServiceDTO) =>
+        datas?.name?.toLowerCase().search(keyWord) !== -1 ||
+        datas.category?.toLowerCase().search(keyWord) !== -1
+    );
+  };
   const handelSearch = useCallback(({ target: { value } }: Target) => {
     setSearch(value);
-    // filter(value);
+    setTimeout(() => setFilteredServices(filter(value, services)), 500);
   }, []);
 
   useEffect(() => {
@@ -33,7 +43,7 @@ const Services = () => {
       <div className="p-4 pt-24">
         {services.length ? (
           <div>
-            <div className="w-3/5 mx-auto my-4 mt-8">
+            <div className="w-3/5 mx-auto my-4 mt-8 bg-white rounded-lg shadow-lg">
               <SearchBar
                 handelChange={handelSearch}
                 value={search}
@@ -41,9 +51,13 @@ const Services = () => {
               />
             </div>
             <div className="grid grid-cols-1 gap-8 p-8 lg:grid-cols-2 xl:grid-cols-3">
-              {services.map((service, index) => (
-                <ServiceItem key={index} service={new Service(service)} />
-              ))}
+              {filteredServices.length
+                ? filteredServices.map((service, index) => (
+                    <ServiceItem key={index} service={new Service(service)} />
+                  ))
+                : services.map((service, index) => (
+                    <ServiceItem key={index} service={new Service(service)} />
+                  ))}
             </div>
           </div>
         ) : (

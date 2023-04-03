@@ -14,8 +14,17 @@ export class Reservation {
     return this.reservation.date;
   }
 
+  get time() {
+    return this.reservation.time;
+  }
+
   get clientName() {
     return this.reservation.client?.username ?? "-";
+  }
+
+
+  get clientEmail() {
+    return this.reservation.client?.email ?? "-";
   }
 
   get fullDate() {

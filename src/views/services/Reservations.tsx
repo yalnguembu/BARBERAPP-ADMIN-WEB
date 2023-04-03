@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
 import SearchBar from "../../components/form/SearchBar";
 import NavBar from "../../components/NavBar";
 import ReservationItem from "../../components/reservations/ReservationItem";
@@ -213,6 +214,7 @@ const Reservations = () => {
           </div>
         )}
       </div>
+      <Outlet />
     </div>
   );
 };

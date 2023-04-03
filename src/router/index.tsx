@@ -12,6 +12,7 @@ import ServiceDetails from "../views/services/ServiceDetails";
 import UpdateService from "../views/services/UpdateService";
 import NewService from "../views/services/NewService";
 import Users from "../views/services/Users";
+import ReservationDetails from "../views/services/ReservationDetails";
 
 const Router = () => {
   return (
@@ -24,7 +25,9 @@ const Router = () => {
             <Route path="new" element={<NewService />} />
             <Route path=":id" element={<ServiceDetails />} />
             <Route path=":id/edit" element={<UpdateService />} />
-            <Route path="reservations" element={<Reservations />} />
+            <Route path="reservations" element={<Reservations />}>
+              <Route path=":id" element={<ReservationDetails />} />
+            </Route>
           </Route>
           <Route path="users" element={<Users />} />
         </Route>

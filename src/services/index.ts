@@ -16,6 +16,7 @@ export type { ServiceDTO } from './models/ServiceDTO';
 export type { UserDTO } from './models/UserDTO';
 
 export { DefaultService } from './services/DefaultService';
+export { ReservationService } from './services/ReservationService';
 export { ReservationsService } from './services/ReservationsService';
 export { ServiceService } from './services/ServiceService';
 export { ServicesService } from './services/ServicesService';

@@ -17,6 +17,7 @@ export type ReservationDTO = {
         email?: string;
     };
     date?: string;
+    time?: string;
     picture: string;
     price: number;
     duration: number;

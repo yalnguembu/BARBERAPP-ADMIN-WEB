@@ -262,6 +262,30 @@ paths:
                   $ref: "#/components/schemas/ReservationDTO"
         "401":
           description: unauthorize
+  /reservation/{id}:
+    get:
+      tags:
+        - Reservation
+      summary: fetch Reservation details
+      description: fetch Reservation details
+      operationId: getReservationById
+      responses:
+        "200":
+          description: informations successfully fecthed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReservationDTO"
+        "401":
+          description: unauthorize
+    parameters:
+      - name: id
+        description: the service id to delet
+        in: path
+        required: true
+        schema:
+          type: string
+        style: simple
 
 components:
   schemas:
@@ -400,6 +424,8 @@ components:
             email:
               type: string
         date:
+          type: string
+        time:
           type: string
         picture:
           type: string
