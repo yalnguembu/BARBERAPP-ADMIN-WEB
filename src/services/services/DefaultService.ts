@@ -128,18 +128,18 @@ export class DefaultService {
      * @throws ApiError
      */
     public static create({
-        requestBody,
+        formData,
     }: {
         /**
          * fields need for create services informations
          */
-        requestBody: CreateServiceDTO,
+        formData: CreateServiceDTO,
     }): CancelablePromise<ServiceDTO> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/service',
-            body: requestBody,
-            mediaType: 'application/json',
+            formData: formData,
+            mediaType: 'multipart/form-data',
         });
     }
 
@@ -151,7 +151,7 @@ export class DefaultService {
      */
     public static update({
         id,
-        requestBody,
+        formData,
     }: {
         /**
          * the service id to delet
@@ -160,7 +160,7 @@ export class DefaultService {
         /**
          * fields need for update services informations
          */
-        requestBody: CreateServiceDTO,
+        formData: CreateServiceDTO,
     }): CancelablePromise<ServiceDTO> {
         return __request(OpenAPI, {
             method: 'PUT',
@@ -168,8 +168,8 @@ export class DefaultService {
             path: {
                 'id': id,
             },
-            body: requestBody,
-            mediaType: 'application/json',
+            formData: formData,
+            mediaType: 'multipart/form-data',
         });
     }
 

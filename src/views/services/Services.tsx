@@ -9,6 +9,7 @@ import { Target } from "../../utils/type";
 const Services = () => {
   const [services, setServices] = useState([]);
   const [search, setSearch] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [filteredServices, setFilteredServices] = useState<ServiceDTO[]>([]);
 
@@ -28,6 +29,7 @@ const Services = () => {
   useEffect(() => {
     ServicesService.getAll()
       .then((services) => {
+        setIsLoading(false)
         setServices(services);
       })
       .catch((error) => {
@@ -41,7 +43,11 @@ const Services = () => {
         <NavBar create />
       </div>
       <div className="p-4 pt-24">
-        {services.length ? (
+        {isLoading ? (
+          <div className="w-full h-96 flex items-center justify-center">
+            <p className="font-bold text-gray-600">Services are loading...</p>
+          </div>
+        ) : services.length ? (
           <div>
             <div className="w-3/5 mx-auto my-4 mt-8 bg-white rounded-lg shadow-lg">
               <SearchBar

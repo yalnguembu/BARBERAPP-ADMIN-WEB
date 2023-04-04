@@ -45,16 +45,14 @@ const NewService = () => {
     event.preventDefault();
     event.stopPropagation();
 
-    const form = new FormData();
-
     DefaultService.create({
-      requestBody: {
+      formData: {
         name,
         duration,
         price,
         category,
         description,
-        picture: "",
+        picture: picture as Blob,
       },
     })
       .then((service: any) => {

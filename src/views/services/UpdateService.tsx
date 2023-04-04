@@ -51,13 +51,13 @@ const NewService = () => {
 
     DefaultService.update({
       id: id as string,
-      requestBody: {
+      formData: {
         name,
         duration,
         price,
         category,
         description,
-        picture: "service-2.png",
+        picture: picture as Blob,
       },
     })
       .then((service: any) => {

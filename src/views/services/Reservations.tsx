@@ -17,6 +17,10 @@ const Reservations = () => {
   >([]);
   const [isArchivedVisible, setisArchivedVisible] = useState<Boolean>(false);
 
+  const [isReservationLoading, setIsReservationLoading] =
+    useState<boolean>(true);
+  const [isArchivedReservationLoading, setIsArchivedReservationLoading] =
+    useState<boolean>(true);
   const [search, setSearch] = useState<string>("");
   const [searchArchived, setSearchArchived] = useState<string>("");
 
@@ -49,6 +53,7 @@ const Reservations = () => {
   const fetchArchivedReservations = () => {
     ReservationsService.getArchived()
       .then((reservations) => {
+        setIsArchivedReservationLoading(false);
         setArchivedReservations(reservations);
       })
       .catch((error) => {
@@ -59,6 +64,7 @@ const Reservations = () => {
   useEffect(() => {
     ReservationsService.getAll()
       .then((reservations) => {
+        setIsReservationLoading(false);
         setReservations(reservations);
       })
       .catch((error) => {
@@ -89,7 +95,9 @@ const Reservations = () => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              className={`w-6 h-6 stroke-gray-500 ${isArchivedVisible && 'rotate-180'}`}
+              className={`w-6 h-6 stroke-gray-500 ${
+                isArchivedVisible && "rotate-180"
+              }`}
             >
               <path
                 strokeLinecap="round"
@@ -101,12 +109,16 @@ const Reservations = () => {
         </div>
         {isArchivedVisible ? (
           <div>
-            {archivedReservations.length ? (
+            {isArchivedReservationLoading ? (
+              <div className="w-full h-96 flex items-center justify-center">
+                <p className="font-bold text-gray-600">Loading...</p>
+              </div>
+            ) : archivedReservations.length ? (
               <div className="bg-white p-4 rounded-lg">
                 <div className="p-4 flex items-center justify-between border-b">
                   <h3 className="text-xl text-gray-500">
                     <span className="font-bold text-black">
-                      {archivedReservations?.length}{" "}
+                      {archivedReservations?.length}
                     </span>
                     archived reservations in total
                   </h3>
@@ -162,7 +174,11 @@ const Reservations = () => {
             In comming reservations
           </span>
         </div>
-        {reservations.length ? (
+        {isReservationLoading ? (
+          <div className="w-full h-96 flex items-center justify-center">
+            <p className="font-bold text-gray-600">Loading...</p>
+          </div>
+        ) : reservations.length ? (
           <div className="bg-white p-4 rounded-lg">
             <div className="p-4 flex items-center justify-between border-b">
               <h3 className="text-xl text-gray-500">

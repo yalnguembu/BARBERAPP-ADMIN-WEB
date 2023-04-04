@@ -35,4 +35,30 @@ export class ReservationService {
         });
     }
 
+    /**
+     * cancel reservation
+     * cancel reservation
+     * @returns any reservation successfully cancel
+     * @throws ApiError
+     */
+    public static cancelReservation({
+        id,
+    }: {
+        /**
+         * the service id to delet
+         */
+        id: string,
+    }): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'PUT',
+            url: '/reservation/{id}/cancel',
+            path: {
+                'id': id,
+            },
+            errors: {
+                401: `unauthorize`,
+            },
+        });
+    }
+
 }

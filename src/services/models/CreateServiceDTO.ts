@@ -6,7 +6,7 @@ export type CreateServiceDTO = {
     name: string;
     description?: string;
     category: string;
-    picture: string;
+    picture: Blob;
     price: number;
     duration: number;
 };

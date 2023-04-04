@@ -163,7 +163,7 @@ paths:
         description: fields need for create services informations
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
               $ref: "#/components/schemas/CreateServiceDTO"
       responses:
@@ -197,7 +197,7 @@ paths:
         description: fields need for update services informations
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
               $ref: "#/components/schemas/CreateServiceDTO"
       responses:
@@ -286,6 +286,26 @@ paths:
         schema:
           type: string
         style: simple
+  /reservation/{id}/cancel:
+    put:
+      tags:
+        - Reservation
+      summary: cancel reservation
+      description: cancel reservation
+      operationId: cancelReservation
+      responses:
+        "200":
+          description: reservation successfully cancel
+        "401":
+          description: unauthorize
+    parameters:
+      - name: id
+        description: the service id to delet
+        in: path
+        required: true
+        schema:
+          type: string
+        style: simple
 
 components:
   schemas:
@@ -356,6 +376,7 @@ components:
           type: string
         picture:
           type: string
+          format: binary
         price:
           type: number
         duration:
